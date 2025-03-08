@@ -50,6 +50,4 @@ I found these websites useful in developing this software:
 The following items I plan to fix, improve, and/or add to this project in the future:
 
 * [ ] Add more detailed error handling using the `Result` type.
-* [ ] Improve the user interface for better usability.
-* [ ] Add functionality to delete recipes.
 * [ ] Add a GUI
