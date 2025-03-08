@@ -203,7 +203,6 @@ fn view_recipes(recipe_book: &mut Book) {
 
 fn main() {
 
-    // Create a directory to store the recipes
     let _ = fs::create_dir("recipe_book");
     let mut recipe_book = Book::new();
     let mut input = String::new();

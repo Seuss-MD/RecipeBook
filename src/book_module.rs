@@ -2,12 +2,10 @@
 
 use std::fs::{self, read_dir};
 use serde::{Deserialize, Serialize};
-use serde_json::from_str;
 use std::fs::File;
 use std::io::*;
 
 
-// Define a struct (like a class in C++)
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Recipe {
     name: String,
@@ -25,10 +23,7 @@ impl Book{
         Book { recipes: Vec::new() }
     }
 
-    pub fn new_recipe(&mut self, name: String) {
-        let recipe = Recipe::new(name);
-        self.recipes.push(recipe);
-    }
+
 
     pub fn add_recipe(&mut self, recipe: Recipe) {
         self.recipes.push(recipe);
@@ -63,8 +58,8 @@ impl Book{
     }
 
     pub fn parse_file_into_recipe(file_path: &str) -> Recipe {
-        let data = fs::read_to_string(file_path).unwrap(); // Read file contents
-        let recipe: Recipe = serde_json::from_str(&data).unwrap(); // Deserialize JSON
+        let data = fs::read_to_string(file_path).unwrap(); 
+        let recipe: Recipe = serde_json::from_str(&data).unwrap(); 
         return recipe;
     }
 
@@ -244,9 +239,7 @@ impl Book{
 
 
 
-// Define methods for the struct using `impl`
 impl Recipe {
-    // Constructor-like function to create a new Person
 
     
     pub fn new(name: String) -> Self {
@@ -257,7 +250,6 @@ impl Recipe {
         Recipe { name: self.name.clone(), ingredients: self.ingredients.clone(), instructions: self.instructions.clone(), author: self.author.clone() }
     }
 
-    // Method that acts like a member function in a class
     pub fn add_ingredient(&mut self, ingredient: String) {
         self.ingredients.push(ingredient.clone());
         println!("Ingredient {} added successfully", ingredient);
@@ -321,19 +313,8 @@ impl Recipe {
         &self.name
     }
 
-    pub fn get_recipe(&self) {
-        println!("Recipe Name: {}", self.name);
-        println!("Author: {}\n", self.author.as_deref().unwrap_or("Unknown"));
-        println!("Ingredients: ");
-        for item in &self.ingredients {
-            println!("       {}", item);
-        }
-        println!();
-        println!("Instructions: {}", self.instructions);
-        println!();
-    }
 
-    // Method to get the person's age
+
 
     pub fn save_recipe(&self) {
         let json_string = serde_json::to_string(&self).unwrap();
