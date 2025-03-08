@@ -195,7 +195,9 @@ impl Book{
         None
     }
 
-
+    fn delete_recipe(&mut self, index: usize) {
+        self.recipes.remove(index-1);
+    }
     
 
     pub fn menu_view_recipe(&mut self) -> Option<usize> {
@@ -204,7 +206,8 @@ impl Book{
             println!("Select an option:");
             println!("1. Open recipe");
             println!("2. Edit recipe");
-            println!("3. Exit");
+            println!("3. Delete recipe");
+            println!("4. Exit");
             let mut input = String::new();
             stdin().read_line(&mut input).unwrap();
             match input.trim() {
@@ -223,6 +226,13 @@ impl Book{
                     self.edit_recipe(uinput.trim().parse().unwrap());
                 }
                 "3" => {
+                    self.display_recipes();
+                    println!("Enter the recipe number to delete:");
+                    let mut uinput = String::new();
+                    stdin().read_line(&mut uinput).unwrap();
+                    self.delete_recipe(uinput.trim().parse().unwrap());
+                }
+                "4" => {
                     return Some(input.trim().parse().unwrap());
                 }
                 _ => println!("Invalid option, please try again."),
